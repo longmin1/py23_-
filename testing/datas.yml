@@ -53,3 +53,47 @@ add:
       - 第二个值None
       - 第一个值空格
       - 第二个值空格
+div:
+  P0:
+    datas:
+      - [1,1,1]
+      - [-0.01,-0.02,0.5]
+      - [-0.01,0.02,-0.5]
+      - [10,0.02,500]
+    ids:
+      - 2个整数相除
+      - 2个负数浮点数相除
+      - 2个（1正1负）浮点数相除
+      - 整数与浮点数相除
+  P0_1:
+    datas:
+      - [99,0,ZeroDivisionError]
+
+    ids:
+      - 异常情况除数为0
+  P1:
+    datas:
+      - [文,9.3,TypeError]
+      - [4,字,TypeError]
+      - [nu,0.2,TypeError]
+      - [30,t,TypeError]
+      - ['*&',0.2,TypeError]
+      - [21.45,'@',TypeError]
+    ids:
+      - 输入中文
+      - 输入中文
+      - 输入英文
+      - 输入英文
+      - 输入特殊字符*&
+      - 输入特殊字符@
+  P2:
+    datas:
+      - [None,20.93,TypeError]
+      - [-3,None,TypeError]
+      - [' ',3.14,TypeError]
+      - [-90,' ',TypeError]
+    ids:
+      - 第一个输入为None
+      - 第二个输入为None
+      - 第一个为空格
+      - 第二个为空格

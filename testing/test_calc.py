@@ -26,6 +26,7 @@ def get_datas():
     return [add_P0_datas, add_P0_ids]
 
 
+
 class TestCalculator:
     def setup_class(self):
         print("实例化calculator对象")
