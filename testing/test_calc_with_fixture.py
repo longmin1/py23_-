@@ -23,7 +23,7 @@ import yaml
 from pythoncode.calculator import Calculator
 
 
-def get_datas(method,level):
+def get_datas(method='add',level='P0'):
     # safe_load: 把yaml 格式 转成python对象
     # safe_dump: 把python对象 转成yaml格式
     with open("./datas.yml", encoding="utf-8") as f:
@@ -36,7 +36,10 @@ def get_datas(method,level):
         print(f"{level} 级别的ids {method_ids}")
     # P0 级别的datas [[1, 1, 2], [-0.01, 0.02, 0.01], [10, 0.02, 10.02]]
     # P0 级别的ids ['2个整数', '2个浮点数', '整数+浮点数']
-    return [method_datas, method_ids]
+    # return [method_datas, method_ids]#返回列表
+    return method_datas, method_ids#返回元组
+
+
 
 
 # 大的功能点
@@ -48,8 +51,8 @@ class TestCalculator:
     # add_P1_1_ids = get_datas('add',"P1_1")[1]
     # add_P1_2_datas = get_datas('add',"P1_2")[0]
     # add_P1_2_ids = get_datas('add',"P1_2")[1]
-    # add_P2_datas = get_datas('add',"P2")[0]
-    # add_P2_ids = get_datas('add',"P2")[1]
+    add_P2_datas = get_datas('add',"P2")[0]
+    add_P2_ids = get_datas('add',"P2")[1]
 
 
     # 冒烟测试用例
@@ -100,18 +103,18 @@ class TestCalculator:
     #
     #     print(e.typename)
 
-    # @pytest.mark.run(order=-1)
-    # @pytest.mark.P2
-    # @pytest.mark.parametrize('a,b, errortype',
-    #                          add_P2_datas,
-    #                          ids=add_P2_ids)
-    # @allure.story("相加功能")
-    # def test_add4(self, get_calc, a, b, errortype):
-    #     # pytest 封装的一种处理异常的方式
-    #     with pytest.raises(eval(errortype)) as e:
-    #         result = get_calc.add(a, b)
-    #
-    #     print(e.typename)
+    @pytest.mark.run(order=-1)
+    @pytest.mark.P2
+    @pytest.mark.parametrize('a,b, errortype',
+                             add_P2_datas,
+                             ids=add_P2_ids)
+    @allure.story("相加功能")
+    def test_add4(self, get_calc, a, b, errortype):
+        # pytest 封装的一种处理异常的方式
+        with pytest.raises(eval(errortype)) as e:
+            result = get_calc.add(a, b)
+
+        print(e.typename)
     @pytest.mark.parametrize('a,b,expect',get_datas('div','P0')[0],ids=get_datas('div','P0')[1])
     @allure.story("p0相除功能")
     def test_div1(self, a,b,expect,get_calc):
